@@ -1,7 +1,12 @@
 from django.urls import path
 
 from .views import (
-    index, TopicListView, NewspaperListView, RedactorListView, NewspaperDetailView, RedactorDetailView,
+    index,
+    TopicListView,
+    NewspaperListView,
+    RedactorListView,
+    NewspaperDetailView,
+    RedactorDetailView,
 )
 
 urlpatterns = [
