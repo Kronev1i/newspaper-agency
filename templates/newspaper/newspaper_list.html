@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>
+    Newspapers List
+  </h1>
+
+  {% if newspaper_list %}
+    <table class="table">
+      <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Published Date</th>
+        <th>Topic</th>
+      </tr>
+
+      {% for newspaper in newspaper_list %}
+        <tr>
+          <td>
+            {{ newspaper.id }}
+          </td>
+          <td>
+            {{ newspaper.title }}
+          </td>
+          <td>
+            {{ newspaper.published_date }}
+          </td>
+          <td>
+            {{ newspaper.topic }}
+          </td>
+        </tr>
+      {% endfor %}
+    </table>
+
+  {% else %}
+      <p>There are no newspapers in the agency.</p>
+  {% endif %}
+{% endblock %}
