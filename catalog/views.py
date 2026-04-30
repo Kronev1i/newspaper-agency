@@ -3,7 +3,6 @@ from django.views import generic
 from .models import Redactor, Newspaper, Topic
 
 
-
 def index(request):
     num_redactors = Redactor.objects.count()
     num_newspapers = Newspaper.objects.count()
@@ -21,7 +20,7 @@ def index(request):
 
     return render(
         request,
-        "newspaper/templates/index.html",
+        "newspaper/index.html",
         context=context
     )
 
@@ -31,7 +30,7 @@ class TopicListView(
 ):
     model = Topic
     context_object_name = "topic_list"
-    template_name = "newspaper/templates/topic_list.html"
+    template_name = "newspaper/topic_list.html"
     paginate_by = 5
 
 
@@ -39,6 +38,8 @@ class NewspaperListView(
     generic.ListView
 ):
     model = Newspaper
+    context_object_name = "newspaper_list"
+    template_name = "newspaper/newspaper_list.html"
     paginate_by = 5
     queryset = Newspaper.objects.all().select_related("topic")
 
@@ -53,6 +54,8 @@ class RedactorListView(
     generic.ListView
 ):
     model = Redactor
+    context_object_name = "redactor_list"
+    template_name = "newspaper/redactor_list.html"
     paginate_by = 5
 
 
