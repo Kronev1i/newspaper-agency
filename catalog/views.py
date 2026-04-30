@@ -47,6 +47,7 @@ class NewspaperListView(
 class NewspaperDetailView(
     generic.DetailView
 ):
+    template_name = "newspaper/newspaper_detail.html"
     model = Newspaper
 
 
@@ -63,4 +64,5 @@ class RedactorDetailView(
     generic.DetailView
 ):
     model = Redactor
+    template_name = "newspaper/redactor_detail.html"
     queryset = Redactor.objects.all().prefetch_related("newspapers__topic")
