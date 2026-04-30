@@ -30,3 +30,6 @@ class Newspaper(models.Model):
     published_date = models.DateField(auto_now_add=True)
     topic = models.ForeignKey(Topic, on_delete=models.CASCADE, related_name="newspapers")
     publishers = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="newspapers")
+
+    def __str__(self):
+        return f"{self.title} ({self.topic.name})"
