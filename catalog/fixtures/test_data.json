@@ -1,0 +1,46 @@
+[
+  {
+    "model": "catalog.topic",
+    "pk": 1,
+    "fields": { "name": "Politics" }
+  },
+  {
+    "model": "catalog.topic",
+    "pk": 2,
+    "fields": { "name": "IT & Tech" }
+  },
+  {
+    "model": "catalog.redactor",
+    "pk": 1,
+    "fields": {
+      "username": "chief_editor",
+      "first_name": "John",
+      "last_name": "Doe",
+      "years_of_experience": 10,
+      "is_staff": true,
+      "password": "pbkdf2_sha256$390000$testpassword"
+    }
+  },
+  {
+    "model": "catalog.newspaper",
+    "pk": 1,
+    "fields": {
+      "title": "Django 5.0 Released",
+      "content": "The new version of Django is finally here with amazing features...",
+      "published_date": "2026-04-30",
+      "topic": 2,
+      "publishers": [1]
+    }
+  },
+  {
+    "model": "catalog.newspaper",
+    "pk": 2,
+    "fields": {
+      "title": "New Elections in Almaty",
+      "content": "Local authorities announced the date for upcoming elections...",
+      "published_date": "2026-05-01",
+      "topic": 1,
+      "publishers": [1]
+    }
+  }
+]
