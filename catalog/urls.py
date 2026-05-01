@@ -1,7 +1,4 @@
-from django.contrib.auth.views import (
-    LogoutView,
-    LoginView,
-)
+from django.contrib.auth.views import LoginView
 from django.urls import path
 
 from .views import (
@@ -11,6 +8,8 @@ from .views import (
     RedactorListView,
     NewspaperDetailView,
     RedactorDetailView, logout_confirm_view, NewspaperCreateView, TopicCreateView, RedactorCreateView,
+    NewspaperUpdateView, RedactorUpdateView, TopicUpdateView, NewspaperDeleteView, RedactorDeleteView, TopicDeleteView,
+    TopicDetailView,
 )
 
 urlpatterns = [
@@ -44,6 +43,11 @@ urlpatterns = [
         name="redactor-detail"
     ),
     path(
+        "topics/<int:pk>/",
+        TopicDetailView.as_view(),
+        name="topic-detail",
+    ),
+    path(
         "newspapers/create/",
         NewspaperCreateView.as_view(),
         name="newspaper-create"
@@ -57,6 +61,36 @@ urlpatterns = [
         "redactors/create/",
         RedactorCreateView.as_view(),
         name="redactor-create"
+    ),
+    path(
+        "newspapers/<int:pk>/update/",
+        NewspaperUpdateView.as_view(),
+        name="newspaper-update",
+    ),
+    path(
+        "redactors/<int:pk>/update/",
+        RedactorUpdateView.as_view(),
+        name="redactor-update",
+    ),
+    path(
+        "topics/<int:pk>/update/",
+        TopicUpdateView.as_view(),
+        name="topic-update",
+    ),
+    path(
+        "newspapers/<int:pk>/delete/",
+        NewspaperDeleteView.as_view(),
+        name="newspaper-delete",
+    ),
+    path(
+        "redactors/<int:pk>/delete/",
+        RedactorDeleteView.as_view(),
+        name="redactor-delete",
+    ),
+    path(
+        "topics/<int:pk>/delete/",
+        TopicDeleteView.as_view(),
+        name="topic-delete",
     ),
     path(
         "confirm-logout/",

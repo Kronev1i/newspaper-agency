@@ -4,6 +4,17 @@
   <h1>
     Username: {{ redactor.username }}
   </h1>
+  <div class="d-flex justify-content-end">
+    <a href="{% url 'catalog:redactor-update' pk=redactor.id %}" 
+      class="btn btn-primary" 
+      style="margin-right: 15px !important;">
+      Update
+    </a>
+    <a href="{% url 'catalog:redactor-delete' pk=redactor.id %}" 
+      class="btn btn-danger">
+      Delete
+    </a>
+  </div>
 
   <p><strong>First name:</strong> {{ redactor.first_name }}</p>
   <p><strong>Last name:</strong> {{ redactor.last_name }}</p>

@@ -11,7 +11,7 @@
     <ul>
       {% for topic in topic_list %}
         <li>
-          {{ topic.name }}
+          <a href="{% url "catalog:topic-detail" pk=topic.id %} ">{{ topic.name }}</a>
         </li>
       {% endfor %}
     </ul>

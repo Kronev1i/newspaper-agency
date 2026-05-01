@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>
+    {{ topic.name }}
+  </h1>
+  <div class="d-flex justify-content-end">
+    <a href="{% url 'catalog:topic-update' pk=topic.id %}" 
+      class="btn btn-primary" 
+      style="margin-right: 15px !important;">
+      Update
+    </a>
+    <a href="{% url 'catalog:topic-delete' pk=topic.id %}" 
+      class="btn btn-danger">
+      Delete
+    </a>
+  </div>
+  <h2>Name: {{ topic.name }}</h2>
+  <h3>Newspapers with this topic:</h3>
+  {% if topic.newspaper_set.all %}
+    <ul class="list-group">
+      {% for newspaper in topic.newspaper_set.all %}
+        <li class="list-group-item">
+          <a href="{% url 'catalog:newspaper-detail' pk=newspaper.id %}">
+            {{ newspaper.title }}
+          </a>
+          <p>Published: {{ newspaper.published_date }}</p>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p class="text-warning">No newspapers found for this topic yet.</p>
+  {% endif %}
+{% endblock %}

@@ -23,7 +23,7 @@
             {{ newspaper.id }}
           </td>
           <td>
-            {{ newspaper.title }}
+            <a href="{% url "catalog:newspaper-detail" pk=newspaper.id %} ">{{ newspaper.title }}</a>
           </td>
           <td>
             {{ newspaper.published_date }}

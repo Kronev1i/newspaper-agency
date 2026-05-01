@@ -40,6 +40,14 @@ class TopicListView(
     paginate_by = 5
 
 
+class TopicDetailView(
+    LoginRequiredMixin,
+    generic.DetailView
+):
+    template_name = "newspaper/topic_detail.html"
+    model = Topic
+
+
 class TopicCreateView(
     LoginRequiredMixin,
     generic.CreateView
@@ -47,6 +55,25 @@ class TopicCreateView(
     model = Topic
     fields = "__all__"
     template_name = "newspaper/topic_form.html"
+    success_url = reverse_lazy("catalog:topic-list")
+
+
+class TopicUpdateView(
+    LoginRequiredMixin,
+    generic.UpdateView
+):
+    model = Topic
+    fields = "__all__"
+    template_name = "newspaper/topic_form.html"
+    success_url = reverse_lazy("catalog:topic-list")
+
+
+class TopicDeleteView(
+    LoginRequiredMixin,
+    generic.DeleteView
+):
+    model = Topic
+    template_name = "newspaper/topic_confirm_delete.html"
     success_url = reverse_lazy("catalog:topic-list")
 
 
@@ -68,6 +95,25 @@ class NewspaperCreateView(
     model = Newspaper
     form_class = NewspaperCreationForm
     template_name = "newspaper/newspaper_form.html"
+    success_url = reverse_lazy("catalog:newspaper-list")
+
+
+class NewspaperUpdateView(
+    LoginRequiredMixin,
+    generic.UpdateView
+):
+    model = Newspaper
+    fields = "__all__"
+    template_name = "newspaper/newspaper_form.html"
+    success_url = reverse_lazy("catalog:newspaper-list")
+
+
+class NewspaperDeleteView(
+    LoginRequiredMixin,
+    generic.DeleteView
+):
+    model = Newspaper
+    template_name = "newspaper/newspaper_confirm_delete.html"
     success_url = reverse_lazy("catalog:newspaper-list")
 
 
@@ -96,6 +142,31 @@ class RedactorCreateView(
     model = Redactor
     template_name = "newspaper/newspaper_form.html"
     form_class = RedactorCreationForm
+    success_url = reverse_lazy("catalog:redactor-list")
+
+
+class RedactorUpdateView(
+    LoginRequiredMixin,
+    generic.UpdateView
+):
+    model = Redactor
+    fields = (
+        "username",
+        "first_name",
+        "last_name",
+        "email",
+        "years_of_experience"
+    )
+    template_name = "newspaper/redactor_form.html"
+    success_url = reverse_lazy("catalog:redactor-list")
+
+
+class RedactorDeleteView(
+    LoginRequiredMixin,
+    generic.DeleteView
+):
+    model = Redactor
+    template_name = "newspaper/redactor_confirm_delete.html"
     success_url = reverse_lazy("catalog:redactor-list")
 
 
