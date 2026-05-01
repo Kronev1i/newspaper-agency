@@ -177,7 +177,7 @@ class NewspaperUpdateView(
     generic.UpdateView
 ):
     model = Newspaper
-    fields = "__all__"
+    form_class = NewspaperCreationForm
     template_name = "newspaper/newspaper_form.html"
     success_url = reverse_lazy("catalog:newspaper-list")
 
@@ -239,7 +239,7 @@ class RedactorCreateView(
     generic.CreateView
 ):
     model = Redactor
-    template_name = "newspaper/newspaper_form.html"
+    template_name = "newspaper/redactor_form.html"
     form_class = RedactorCreationForm
     success_url = reverse_lazy("catalog:redactor-list")
 
