@@ -2,15 +2,20 @@
 {% load crispy_forms_filters %}
 
 {% block content %}
-<h2>Are you sure you want to log out of your account?</h2>
-<br>
-<p><i>You can always log into your account</i></p>
-<form method="post" action="{% url 'logout' %}">
-  {% csrf_token %}
-  {{ form|crispy }}
+  <h2>Are you sure you want to log out of your account?</h2>
+  <br>
+  <p><i>You can always log into your account</i></p>
+  <form method="post" action="{% url 'logout' %}">
+    {% csrf_token %}
+    {{ form|crispy }}
 
-  <input type="submit" value="Logout" class="btn btn-danger" />
-  <input type="hidden" name="next" value="{{ next }}" />
-</form>
-
+    <input type="submit" value="Logout" class="btn btn-danger"/>
+    <input type="hidden" name="next" value="{{ next }}"/>
+  </form>
+  <button type="button"
+          class="btn btn-outline-secondary"
+          onclick="window.history.back();"
+          style="margin-right: 15px !important;">
+    Cancel
+  </button>
 {% endblock %}
