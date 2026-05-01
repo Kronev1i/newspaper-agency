@@ -1,26 +1,26 @@
 <ul class="sidebar-nav list-group">
   {% if user.is_authenticated %}
-    <li class="list-group-item">User: <a href="{{ user.get_absolute_url }}">{{ user.get_username }}</a></li>
-    <li class="list-group-item"><a href="{% url 'catalog:logout-confirm-view' %}">Logout</a></li>
+    <li class="list-group-item text-decoration-none">User: <a href="{{ user.get_absolute_url }}">{{ user.get_username }}</a></li>
+    <li class="list-group-item text-decoration-none"><a href="{% url 'catalog:logout-confirm-view' %}">Logout</a></li>
   {% else %}
-    <li class="list-group-item"><a href="{% url 'login'%}?next={{request.path}}">Login</a></li>
+    <li class="list-group-item text-decoration-none"><a href="{% url 'login' %}?next={{ request.path }}">Login</a></li>
   {% endif %}
-  <li class="list-group-item">
+  <li class="list-group-item text-decoration-none">
     <a href="{% url 'catalog:index' %}">
       Home
     </a>
   </li>
-  <li class="list-group-item">
+  <li class="list-group-item text-decoration-none">
     <a href="{% url 'catalog:redactor-list' %}">
       All redactors
     </a>
   </li>
-  <li class="list-group-item">
+  <li class="list-group-item text-decoration-none">
     <a href="{% url 'catalog:newspaper-list' %}">
       All newspapers
     </a>
   </li>
-  <li class="list-group-item">
+  <li class="list-group-item text-decoration-none">
     <a href="{% url 'catalog:topic-list' %}">
       All topic
     </a>
