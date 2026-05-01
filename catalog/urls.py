@@ -10,7 +10,7 @@ from .views import (
     NewspaperListView,
     RedactorListView,
     NewspaperDetailView,
-    RedactorDetailView, logout_confirm_view,
+    RedactorDetailView, logout_confirm_view, NewspaperCreateView, TopicCreateView, RedactorCreateView,
 )
 
 urlpatterns = [
@@ -42,6 +42,21 @@ urlpatterns = [
         "redactors/<int:pk>/",
         RedactorDetailView.as_view(),
         name="redactor-detail"
+    ),
+    path(
+        "newspapers/create/",
+        NewspaperCreateView.as_view(),
+        name="newspaper-create"
+    ),
+    path(
+        "topics/create/",
+        TopicCreateView.as_view(),
+        name="topic-create"
+    ),
+    path(
+        "redactors/create/",
+        RedactorCreateView.as_view(),
+        name="redactor-create"
     ),
     path(
         "confirm-logout/",

@@ -4,6 +4,9 @@
   <h1>
     Newspapers List
   </h1>
+  <a href="{% url 'catalog:newspaper-create' %}" class="btn btn-primary link-to-page">
+    Create
+  </a>
 
   {% if newspaper_list %}
     <table class="table">

@@ -4,7 +4,9 @@
     <h1>
       Redactor List
     </h1>
-
+    <a href="{% url 'catalog:redactor-create' %}" class="btn btn-primary link-to-page">
+    Create
+    </a>
     {% if redactor_list %}
     <table class="table">
       <tr>
