@@ -35,5 +35,8 @@ class Newspaper(models.Model):
     topic = models.ForeignKey(Topic, on_delete=models.CASCADE, related_name="newspapers")
     publishers = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="newspapers")
 
+    class Meta:
+        ordering = ["title"]
+
     def __str__(self):
         return f"{self.title} ({self.topic.name})"
