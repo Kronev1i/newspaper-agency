@@ -5,6 +5,19 @@
     {{ newspaper.title }}
   </h1>
   <div class="d-flex justify-content-end">
+    {% if user in newspaper.publishers.all %}
+      <a href="{% url 'catalog:toggle-newspaper-assign' pk=newspaper.id %}" 
+         class="btn btn-danger"
+         style="margin-right: 15px !important;">
+        Delete me from publishers
+      </a>
+    {% else %}
+      <a href="{% url 'catalog:toggle-newspaper-assign' pk=newspaper.id %}" 
+         class="btn btn-success"
+         style="margin-right: 15px !important;">
+        Assign me to this newspaper
+      </a>
+    {% endif %}
     <a href="{% url 'catalog:newspaper-update' pk=newspaper.id %}"
        class="btn btn-primary"
        style="margin-right: 15px !important;">
