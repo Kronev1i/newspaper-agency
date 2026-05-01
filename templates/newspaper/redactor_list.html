@@ -1,13 +1,20 @@
 {% extends "base.html" %}
+{% load crispy_forms_filters %}
 
 {% block content %}
-    <h1>
-      Redactor List
-    </h1>
-    <a href="{% url 'catalog:redactor-create' %}" class="btn btn-primary link-to-page">
+  <h1>
+    Redactor List
+  </h1>
+  <form action="" method="get">
+    {{ search_form|crispy }}
+    <button type="submit" class="btn btn-dark text-uppercase mb-3">
+      Search
+    </button>
+  </form>
+  <a href="{% url 'catalog:redactor-create' %}" class="btn btn-primary link-to-page">
     Create
-    </a>
-    {% if redactor_list %}
+  </a>
+  {% if redactor_list %}
     <table class="table">
       <tr>
         <th>ID</th>
@@ -16,18 +23,19 @@
         <th>Last name</th>
         <th>Years of experience</th>
       </tr>
-    {% for redactor in redactor_list %}
-      <tr>
-        <td>{{ redactor.id }}</td>
-        <td><a href="{{ redactor.get_absolute_url }}">{{ redactor.username }} {% if user == redactor %} (Me){% endif %}</a></td>
-        <td>{{ redactor.first_name }}</td>
-        <td>{{ redactor.last_name }}</td>
-        <td>{{ redactor.years_of_experience }}</td>
-      </tr>
-    {% endfor %}
+      {% for redactor in redactor_list %}
+        <tr>
+          <td>{{ redactor.id }}</td>
+          <td><a href="{{ redactor.get_absolute_url }}">{{ redactor.username }} {% if user == redactor %}
+            (Me){% endif %}</a></td>
+          <td>{{ redactor.first_name }}</td>
+          <td>{{ redactor.last_name }}</td>
+          <td>{{ redactor.years_of_experience }}</td>
+        </tr>
+      {% endfor %}
 
     </table>
-    {% else %}
-      <p>There are no redactors in the agency.</p>
-    {% endif %}
+  {% else %}
+    <p>There are no redactors in the agency.</p>
+  {% endif %}
 {% endblock %}

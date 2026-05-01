@@ -1,9 +1,16 @@
 {% extends "base.html" %}
+{% load crispy_forms_filters %}
 
 {% block content %}
   <h1>
     Newspapers List
   </h1>
+  <form action="" method="get">
+    {{ search_form|crispy }}
+    <button type="submit" class="btn btn-dark text-uppercase mb-3">
+      Search
+    </button>
+  </form>
   <a href="{% url 'catalog:newspaper-create' %}" class="btn btn-primary link-to-page">
     Create
   </a>
@@ -36,6 +43,6 @@
     </table>
 
   {% else %}
-      <p>There are no newspapers in the agency.</p>
+    <p>There are no newspapers in the agency.</p>
   {% endif %}
 {% endblock %}
