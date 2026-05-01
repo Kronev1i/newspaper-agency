@@ -15,6 +15,7 @@ from .models import Redactor, Newspaper, Topic
 
 @login_required
 def index(request):
+    """View function for the home page of the site."""
     num_redactors = Redactor.objects.count()
     num_newspapers = Newspaper.objects.count()
     num_topics = Topic.objects.count()
@@ -40,14 +41,19 @@ class TopicListView(
     LoginRequiredMixin,
     generic.ListView
 ):
+    """View class for the list of topics with search functionality."""
     model = Topic
     context_object_name = "topic_list"
     template_name = "newspaper/topic_list.html"
     paginate_by = 5
 
     def get_context_data(
-        self, *, object_list=..., **kwargs
+        self,
+        *,
+        object_list=...,
+        **kwargs
     ):
+        """Pass search form to the template context."""
         context = super(
             TopicListView,
             self
@@ -61,6 +67,7 @@ class TopicListView(
         return context
 
     def get_queryset(self):
+        """Filter topics by name search query."""
         queryset = super().get_queryset()
         name = self.request.GET.get("name")
         if name:
@@ -72,6 +79,7 @@ class TopicDetailView(
     LoginRequiredMixin,
     generic.DetailView
 ):
+    """Detailed information about a specific topic."""
     template_name = "newspaper/topic_detail.html"
     model = Topic
 
@@ -109,6 +117,7 @@ class NewspaperListView(
     LoginRequiredMixin,
     generic.ListView
 ):
+    """View class for the list of newspapers with optimized topic loading."""
     model = Newspaper
     context_object_name = "newspaper_list"
     template_name = "newspaper/newspaper_list.html"
@@ -116,8 +125,12 @@ class NewspaperListView(
     queryset = Newspaper.objects.all().select_related("topic")
 
     def get_context_data(
-        self, *, object_list=..., **kwargs
+        self,
+        *,
+        object_list=...,
+        **kwargs
     ):
+        """Include NewspaperTitleSearchForm in the context."""
         context = super(
             NewspaperListView,
             self
@@ -131,6 +144,7 @@ class NewspaperListView(
         return context
 
     def get_queryset(self):
+        """Filter newspapers by title."""
         queryset = super().get_queryset()
         title = self.request.GET.get("title")
         if title:
@@ -179,6 +193,7 @@ class RedactorListView(
     LoginRequiredMixin,
     generic.ListView
 ):
+    """View class for the list of redactors with username search."""
     model = Redactor
     context_object_name = "redactor_list"
     template_name = "newspaper/redactor_list.html"
@@ -187,6 +202,7 @@ class RedactorListView(
     def get_context_data(
         self, *, object_list=..., **kwargs
     ):
+        """Pass RedactorUsernameSearchForm to the template."""
         context = super(
             RedactorListView,
             self
@@ -200,6 +216,7 @@ class RedactorListView(
         return context
 
     def get_queryset(self):
+        """Filter redactors by username."""
         queryset = super().get_queryset()
         username = self.request.GET.get("username")
         if username:
@@ -245,6 +262,7 @@ class RedactorDetailView(
     LoginRequiredMixin,
     generic.DetailView
 ):
+    """Detailed information about a redactor with their newspapers."""
     model = Redactor
     template_name = "newspaper/redactor_detail.html"
     queryset = Redactor.objects.all().prefetch_related("newspapers__topic")

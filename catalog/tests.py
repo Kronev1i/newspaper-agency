@@ -6,6 +6,7 @@ from django.urls import reverse
 
 
 class FormTest(TestCase):
+    """Tests for catalog forms validation."""
     def test_years_of_experience_validation(self):
         form_data = {"years_of_experience": 10}
         form = RedactorExperienceUpdateForm(data=form_data)
@@ -17,6 +18,7 @@ class FormTest(TestCase):
 
 
 class SearchTest(TestCase):
+    """Tests for search functionality across different models."""
     def setUp(self):
         self.user = get_user_model().objects.create_user(
             username="test_redactor",
