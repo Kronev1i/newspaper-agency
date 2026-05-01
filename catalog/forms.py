@@ -23,3 +23,15 @@ class NewspaperCreationForm(forms.ModelForm):
     class Meta:
         model = Newspaper
         fields = "__all__"
+
+
+class RedactorUsernameSearchForm(forms.Form):
+    username = forms.CharField(max_length=255, required=False)
+
+
+class NewspaperTitleSearchForm(forms.Form):
+    title = forms.CharField(max_length=255, required=False)
+
+
+class TopicNameSearchForm(forms.Form):
+    name = forms.CharField(max_length=255, required=False)
