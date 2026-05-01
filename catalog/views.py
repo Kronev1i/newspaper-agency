@@ -1,8 +1,10 @@
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.views import generic
 from .models import Redactor, Newspaper, Topic
 
-
+@login_required
 def index(request):
     num_redactors = Redactor.objects.count()
     num_newspapers = Newspaper.objects.count()
@@ -26,6 +28,7 @@ def index(request):
 
 
 class TopicListView(
+    LoginRequiredMixin,
     generic.ListView
 ):
     model = Topic
@@ -35,6 +38,7 @@ class TopicListView(
 
 
 class NewspaperListView(
+    LoginRequiredMixin,
     generic.ListView
 ):
     model = Newspaper
@@ -45,6 +49,7 @@ class NewspaperListView(
 
 
 class NewspaperDetailView(
+    LoginRequiredMixin,
     generic.DetailView
 ):
     template_name = "newspaper/newspaper_detail.html"
@@ -52,6 +57,7 @@ class NewspaperDetailView(
 
 
 class RedactorListView(
+    LoginRequiredMixin,
     generic.ListView
 ):
     model = Redactor
@@ -61,8 +67,13 @@ class RedactorListView(
 
 
 class RedactorDetailView(
+    LoginRequiredMixin,
     generic.DetailView
 ):
     model = Redactor
     template_name = "newspaper/redactor_detail.html"
     queryset = Redactor.objects.all().prefetch_related("newspapers__topic")
+
+
+def logout_confirm_view(request):
+    return render(request, "registration/logout_confirm.html")

@@ -1,3 +1,7 @@
+from django.contrib.auth.views import (
+    LogoutView,
+    LoginView,
+)
 from django.urls import path
 
 from .views import (
@@ -6,7 +10,7 @@ from .views import (
     NewspaperListView,
     RedactorListView,
     NewspaperDetailView,
-    RedactorDetailView,
+    RedactorDetailView, logout_confirm_view,
 )
 
 urlpatterns = [
@@ -39,6 +43,16 @@ urlpatterns = [
         RedactorDetailView.as_view(),
         name="redactor-detail"
     ),
+    path(
+        "confirm-logout/",
+        logout_confirm_view,
+        name="logout-confirm-view"
+    ),
+    path(
+        "login/",
+        LoginView.as_view(),
+        name="login"
+    )
 ]
 
 
