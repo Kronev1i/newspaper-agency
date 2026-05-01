@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views import generic
 
@@ -12,6 +12,15 @@ from .forms import (
     RedactorUsernameSearchForm
 )
 from .models import Redactor, Newspaper, Topic
+
+@login_required
+def toggle_assign_to_newspaper(request, pk):
+    newspaper = get_object_or_404(Newspaper, pk=pk)
+    if request.user in newspaper.publishers.all():
+        newspaper.publishers.remove(request.user)
+    else:
+        newspaper.publishers.add(request.user)
+    return redirect("catalog:newspaper-detail", pk=pk)
 
 
 @login_required
@@ -168,7 +177,7 @@ class NewspaperUpdateView(
     generic.UpdateView
 ):
     model = Newspaper
-    fields = "__all__"
+    form_class = NewspaperCreationForm
     template_name = "newspaper/newspaper_form.html"
     success_url = reverse_lazy("catalog:newspaper-list")
 
@@ -230,7 +239,7 @@ class RedactorCreateView(
     generic.CreateView
 ):
     model = Redactor
-    template_name = "newspaper/newspaper_form.html"
+    template_name = "newspaper/redactor_form.html"
     form_class = RedactorCreationForm
     success_url = reverse_lazy("catalog:redactor-list")
 

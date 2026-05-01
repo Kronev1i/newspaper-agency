@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from django.core.exceptions import ValidationError
 
-from catalog.models import Redactor, Newspaper
+from catalog.models import Redactor, Newspaper, Topic
 
 
 class RedactorCreationForm(UserCreationForm):
@@ -20,6 +20,13 @@ class NewspaperCreationForm(forms.ModelForm):
     publishers = forms.ModelMultipleChoiceField(
         queryset=get_user_model().objects.all(),
         widget=forms.CheckboxSelectMultiple,
+    )
+    topic = forms.ModelChoiceField(
+        queryset=Topic.objects.all(),
+        widget=forms.Select(attrs={
+            "class": "form-control",
+            "style": "height: 50px;"
+        })
     )
 
     class Meta:
