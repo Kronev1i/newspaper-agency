@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>
+    {{ newspaper.title }}
+  </h1>
+  <div class="d-flex justify-content-end">
+    <a href="{% url 'catalog:newspaper-update' pk=newspaper.id %}"
+       class="btn btn-primary"
+       style="margin-right: 15px !important;">
+      Update
+    </a>
+    <a href="{% url 'catalog:newspaper-delete' pk=newspaper.id %}"
+       class="btn btn-danger">
+      Delete
+    </a>
+  </div>
+  <h2>Topic: {{ newspaper.topic.name }}</h2>
+  <h3>Published date: {{ newspaper.published_date }}</h3>
+  <h3>Redactors:</h3>
+  <ul>
+    {% for redactor in newspaper.publishers.all %}
+      <li>{{ redactor.username }} ({{ redactor.first_name }} {{ redactor.last_name }})</li>
+    {% endfor %}
+  </ul>
+  <p>{{ newspaper.content }}</p>
+  <button type="button"
+          class="btn btn-outline-secondary"
+          onclick="window.history.back();"
+          style="margin-right: 15px !important;">
+    Cancel
+  </button>
+{% endblock %}

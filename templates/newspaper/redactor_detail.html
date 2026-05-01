@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>
+    Username: {{ redactor.username }}
+  </h1>
+  <div class="d-flex justify-content-end">
+    <a href="{% url 'catalog:redactor-update' pk=redactor.id %}"
+       class="btn btn-primary"
+       style="margin-right: 15px !important;">
+      Update
+    </a>
+    <a href="{% url 'catalog:redactor-delete' pk=redactor.id %}"
+       class="btn btn-danger">
+      Delete
+    </a>
+  </div>
+
+  <p><strong>First name:</strong> {{ redactor.first_name }}</p>
+  <p><strong>Last name:</strong> {{ redactor.last_name }}</p>
+  <p><strong>Years of experience:</strong> {{ redactor.years_of_experience }}</p>
+
+  <div class="ml-3">
+    <h4>Editorial Contributions</h4>
+
+    {% for newspaper in redactor.newspapers.all %}
+      <hr>
+      <p><strong>Title:</strong> {{ newspaper.title }}</p>
+      <p><strong>Topic:</strong> {{ newspaper.topic.name }}</p>
+      <p class="text-muted"><strong>Id:</strong> {{ newspaper.id }}</p>
+
+    {% empty %}
+      <p>No articles!</p>
+    {% endfor %}
+  </div>
+  <button type="button"
+          class="btn btn-outline-secondary"
+          onclick="window.history.back();"
+          style="margin-right: 15px !important;">
+    Cancel
+  </button>
+{% endblock %}

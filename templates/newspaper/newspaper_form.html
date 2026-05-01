@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load crispy_forms_filters %}
+
+{% block content %}
+  <h1>{{ object|yesno:"Update,Create" }} newspaper</h1>
+  <form action="" method="post" novalidate>
+    {% csrf_token %}
+    {{ form|crispy }}
+
+    <input type="submit" value="Submit" class="btn btn-primary">
+  </form>
+  <button type="button"
+          class="btn btn-outline-secondary"
+          onclick="window.history.back();"
+          style="margin-right: 15px !important;">
+    Cancel
+  </button>
+{% endblock %}
