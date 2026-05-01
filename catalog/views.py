@@ -13,6 +13,7 @@ from .forms import (
 )
 from .models import Redactor, Newspaper, Topic
 
+
 @login_required
 def index(request):
     """View function for the home page of the site."""
@@ -222,6 +223,7 @@ class RedactorListView(
         if username:
             return queryset.filter(username__icontains=username)
         return queryset
+
 
 class RedactorCreateView(
     LoginRequiredMixin,

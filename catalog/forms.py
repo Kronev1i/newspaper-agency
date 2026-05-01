@@ -47,5 +47,7 @@ class RedactorExperienceUpdateForm(forms.ModelForm):
     def clean_years_of_experience(self):
         years = self.cleaned_data["years_of_experience"]
         if not (0 <= years <= 70):
-            raise ValidationError("Experience should be between 0 and 70 years.")
+            raise ValidationError(
+                "Experience should be between 0 and 70 years."
+            )
         return years
