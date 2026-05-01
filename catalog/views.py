@@ -1,7 +1,10 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.views import generic
+
+from .forms import RedactorCreationForm, NewspaperCreationForm
 from .models import Redactor, Newspaper, Topic
 
 @login_required
@@ -37,6 +40,16 @@ class TopicListView(
     paginate_by = 5
 
 
+class TopicCreateView(
+    LoginRequiredMixin,
+    generic.CreateView
+):
+    model = Topic
+    fields = "__all__"
+    template_name = "newspaper/topic_form.html"
+    success_url = reverse_lazy("catalog:topic-list")
+
+
 class NewspaperListView(
     LoginRequiredMixin,
     generic.ListView
@@ -46,6 +59,16 @@ class NewspaperListView(
     template_name = "newspaper/newspaper_list.html"
     paginate_by = 5
     queryset = Newspaper.objects.all().select_related("topic")
+
+
+class NewspaperCreateView(
+    LoginRequiredMixin,
+    generic.CreateView
+):
+    model = Newspaper
+    form_class = NewspaperCreationForm
+    template_name = "newspaper/newspaper_form.html"
+    success_url = reverse_lazy("catalog:newspaper-list")
 
 
 class NewspaperDetailView(
@@ -64,6 +87,16 @@ class RedactorListView(
     context_object_name = "redactor_list"
     template_name = "newspaper/redactor_list.html"
     paginate_by = 5
+
+
+class RedactorCreateView(
+    LoginRequiredMixin,
+    generic.CreateView
+):
+    model = Redactor
+    template_name = "newspaper/newspaper_form.html"
+    form_class = RedactorCreationForm
+    success_url = reverse_lazy("catalog:redactor-list")
 
 
 class RedactorDetailView(
