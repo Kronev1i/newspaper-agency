@@ -10,6 +10,21 @@
     "fields": { "name": "IT & Tech" }
   },
   {
+    "model": "catalog.topic",
+    "pk": 3,
+    "fields": { "name": "Sports" }
+  },
+  {
+    "model": "catalog.topic",
+    "pk": 4,
+    "fields": { "name": "Culture" }
+  },
+  {
+    "model": "catalog.topic",
+    "pk": 5,
+    "fields": { "name": "Economy" }
+  },
+  {
     "model": "catalog.redactor",
     "pk": 1,
     "fields": {
@@ -22,14 +37,26 @@
     }
   },
   {
+    "model": "catalog.redactor",
+    "pk": 2,
+    "fields": {
+      "username": "python_dev",
+      "first_name": "Mate",
+      "last_name": "Student",
+      "years_of_experience": 2,
+      "is_staff": false,
+      "password": "pbkdf2_sha256$390000$testpassword2"
+    }
+  },
+  {
     "model": "catalog.newspaper",
     "pk": 1,
     "fields": {
-      "title": "Django 5.0 Released",
-      "content": "The new version of Django is finally here with amazing features...",
+      "title": "Django 6.0 Roadmap",
+      "content": "Exploring the future of Python web development with upcoming Django updates.",
       "published_date": "2026-04-30",
       "topic": 2,
-      "publishers": [1]
+      "publishers": [1, 2]
     }
   },
   {
@@ -37,10 +64,54 @@
     "pk": 2,
     "fields": {
       "title": "New Elections in Almaty",
-      "content": "Local authorities announced the date for upcoming elections...",
+      "content": "Local authorities announced the date for upcoming elections in the capital region.",
       "published_date": "2026-05-01",
       "topic": 1,
       "publishers": [1]
+    }
+  },
+  {
+    "model": "catalog.newspaper",
+    "pk": 3,
+    "fields": {
+      "title": "Champions League Final",
+      "content": "The stadium is ready for the biggest game of the season.",
+      "published_date": "2026-05-02",
+      "topic": 3,
+      "publishers": [2]
+    }
+  },
+  {
+    "model": "catalog.newspaper",
+    "pk": 4,
+    "fields": {
+      "title": "Crypto Market Crash",
+      "content": "Bitcoin and Ethereum saw a sharp decline this morning.",
+      "published_date": "2026-05-03",
+      "topic": 5,
+      "publishers": [1]
+    }
+  },
+  {
+    "model": "catalog.newspaper",
+    "pk": 5,
+    "fields": {
+      "title": "Modern Art Exhibition",
+      "content": "New cyberpunk-inspired gallery opens in Berlin.",
+      "published_date": "2026-05-04",
+      "topic": 4,
+      "publishers": [1, 2]
+    }
+  },
+  {
+    "model": "catalog.newspaper",
+    "pk": 6,
+    "fields": {
+      "title": "AI in Journalism",
+      "content": "How neural networks are helping redactors write faster.",
+      "published_date": "2026-05-05",
+      "topic": 2,
+      "publishers": [2]
     }
   }
 ]
