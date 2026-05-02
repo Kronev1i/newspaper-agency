@@ -1,6 +1,8 @@
 from .base import *
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "newspaper-agency-2.onrender.com"]
+
+CSRF_TRUSTED_ORIGINS = ['https://newspaper-agency-2.onrender.com']
 
 DEBUG = os.environ.get("DJANGO_DEBUG", "") != "False"
 
