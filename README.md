@@ -61,3 +61,8 @@ python manage.py test
 - Flake8: The codebase passes all linting checks without any suppressions.
 
 - Docstrings: All views, models, and forms are documented using Python docstrings for better maintainability.
+# Link
+https://newspaper-agency-2.onrender.com
+Test-user:
+Username: Kirill
+Password: Kirill@@@2006
