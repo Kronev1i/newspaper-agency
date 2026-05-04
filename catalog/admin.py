@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import Redactor, Topic, Newspaper
+from catalog.models import Redactor, Topic, Newspaper
 
 
 @admin.register(Redactor)
