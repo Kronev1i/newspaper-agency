@@ -1,14 +1,14 @@
 from django.contrib.auth.views import LoginView
 from django.urls import path
 
-from .views import (
-    index,
+from catalog.views import (
+    IndexView,
     TopicListView,
     NewspaperListView,
     RedactorListView,
     NewspaperDetailView,
     RedactorDetailView,
-    logout_confirm_view,
+    LogoutConfirmView,
     NewspaperCreateView,
     TopicCreateView,
     RedactorCreateView,
@@ -18,12 +18,13 @@ from .views import (
     NewspaperDeleteView,
     RedactorDeleteView,
     TopicDeleteView,
-    TopicDetailView, toggle_assign_to_newspaper,
+    TopicDetailView,
+    NewspaperToggleAssignView,
 )
 
 urlpatterns = [
     path(
-        "", index,
+        "", IndexView.as_view(),
         name="index"
     ),
     path(
@@ -103,12 +104,12 @@ urlpatterns = [
     ),
     path(
     "newspapers/<int:pk>/toggle-assign/",
-    toggle_assign_to_newspaper,
-    name="toggle-newspaper-assign",
+        NewspaperToggleAssignView.as_view(),
+        name="toggle-newspaper-assign",
     ),
     path(
         "confirm-logout/",
-        logout_confirm_view,
+        LogoutConfirmView.as_view(),
         name="logout-confirm-view"
     ),
     path(

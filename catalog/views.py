@@ -1,50 +1,52 @@
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse_lazy
-from django.views import generic
+from django.views import generic, View
 
-from .forms import (
+
+from catalog.forms import (
     RedactorCreationForm,
     NewspaperCreationForm,
     TopicNameSearchForm,
     NewspaperTitleSearchForm,
     RedactorUsernameSearchForm
 )
-from .models import Redactor, Newspaper, Topic
+from catalog.models import (
+    Redactor,
+    Newspaper,
+    Topic
+)
 
-@login_required
-def toggle_assign_to_newspaper(request, pk):
-    newspaper = get_object_or_404(Newspaper, pk=pk)
-    if request.user in newspaper.publishers.all():
-        newspaper.publishers.remove(request.user)
-    else:
-        newspaper.publishers.add(request.user)
-    return redirect("catalog:newspaper-detail", pk=pk)
+class NewspaperToggleAssignView(LoginRequiredMixin, View):
+    context_object_name = "newspaper_toggle_assign"
+    def get(self, request, pk):
+        newspaper = get_object_or_404(Newspaper, pk=pk)
+        if request.user in newspaper.publishers.all():
+            newspaper.publishers.remove(request.user)
+        else:
+            newspaper.publishers.add(request.user)
+        return redirect("catalog:newspaper-detail", pk=pk)
 
 
-@login_required
-def index(request):
-    """View function for the home page of the site."""
-    num_redactors = Redactor.objects.count()
-    num_newspapers = Newspaper.objects.count()
-    num_topics = Topic.objects.count()
+class IndexView(LoginRequiredMixin, generic.TemplateView):
+    template_name = "newspaper/index.html"
 
-    num_visits = request.session.get("num_visits", 0)
-    request.session["num_visits"] = num_visits + 1
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        num_redactors = Redactor.objects.count()
+        num_newspapers = Newspaper.objects.count()
+        num_topics = Topic.objects.count()
 
-    context = {
-        "num_redactors": num_redactors,
-        "num_newspapers": num_newspapers,
-        "num_topics": num_topics,
-        "num_visits": num_visits + 1,
-    }
+        num_visits = self.request.session.get("num_visits", 0)
+        self.request.session["num_visits"] = num_visits + 1
 
-    return render(
-        request,
-        "newspaper/index.html",
-        context=context
-    )
+        context.update({
+            "num_redactors": num_redactors,
+            "num_newspapers": num_newspapers,
+            "num_topics": num_topics,
+            "num_visits": num_visits + 1,
+        })
+        return context
 
 
 class TopicListView(
@@ -279,5 +281,5 @@ class RedactorDetailView(
     queryset = Redactor.objects.all().prefetch_related("newspapers__topic")
 
 
-def logout_confirm_view(request):
-    return render(request, "registration/logout_confirm.html")
+class LogoutConfirmView(generic.TemplateView):
+    template_name = "registration/logout_confirm.html"
