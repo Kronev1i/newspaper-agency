@@ -1,8 +1,9 @@
-from newspaper_agency.settings.base import *
+from .base import * # noqa
+import os
 
 ALLOWED_HOSTS = ["localhost", "127.0.0.1", "newspaper-agency-2.onrender.com"]
 
-CSRF_TRUSTED_ORIGINS = ['https://newspaper-agency-2.onrender.com']
+CSRF_TRUSTED_ORIGINS = ["https://newspaper-agency-2.onrender.com"]
 
 DEBUG = os.environ.get("DJANGO_DEBUG", "") != "False"
 
@@ -28,11 +29,11 @@ MIDDLEWARE = [
 
 DATABASES = {
     "default": {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ['POSTGRES_DB'],
-        'USER': os.environ['POSTGRES_USER'],
-        'PASSWORD': os.environ['POSTGRES_PASSWORD'],
-        'HOST': os.environ['POSTGRES_HOST'],
-        'PORT': int(os.environ['POSTGRES_DB_PORT']),
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.environ["POSTGRES_DB"],
+        "USER": os.environ["POSTGRES_USER"],
+        "PASSWORD": os.environ["POSTGRES_PASSWORD"],
+        "HOST": os.environ["POSTGRES_HOST"],
+        "PORT": int(os.environ["POSTGRES_DB_PORT"]),
     }
 }
