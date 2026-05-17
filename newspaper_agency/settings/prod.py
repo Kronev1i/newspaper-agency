@@ -1,4 +1,4 @@
-from .base import *
+from newspaper_agency.settings.base import *
 
 ALLOWED_HOSTS = ["localhost", "127.0.0.1", "newspaper-agency-2.onrender.com"]
 
