@@ -103,7 +103,7 @@ urlpatterns = [
         name="topic-delete",
     ),
     path(
-    "newspapers/<int:pk>/toggle-assign/",
+        "newspapers/<int:pk>/toggle-assign/",
         NewspaperToggleAssignView.as_view(),
         name="toggle-newspaper-assign",
     ),

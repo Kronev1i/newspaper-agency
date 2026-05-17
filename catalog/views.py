@@ -17,8 +17,10 @@ from catalog.models import (
     Topic
 )
 
+
 class NewspaperToggleAssignView(LoginRequiredMixin, View):
     context_object_name = "newspaper_toggle_assign"
+
     def get(self, request, pk):
         newspaper = get_object_or_404(Newspaper, pk=pk)
         if request.user in newspaper.publishers.all():
