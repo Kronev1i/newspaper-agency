@@ -1,0 +1,34 @@
+services:
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_DB: newspaper_db
+      POSTGRES_USER: newspaper_user
+      POSTGRES_PASSWORD: newspaper_pass
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+  web:
+    build: .
+    command:
+      sh -c "python manage.py migrate &&
+             python manage.py collectstatic --noinput &&
+             gunicorn newspaper_agency.wsgi:application --bind 0.0.0.0:8000"
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    environment:
+      - DJANGO_SETTINGS_MODULE=newspaper_agency.settings.prod
+      - POSTGRES_DB=newspaper_db
+      - POSTGRES_USER=newspaper_user
+      - POSTGRES_PASSWORD=newspaper_pass
+      - POSTGRES_HOST=db
+      - POSTGRES_DB_PORT=5432
+      - DJANGO_DEBUG=False
+    depends_on:
+      - db
+
+volumes:
+  postgres_data:
