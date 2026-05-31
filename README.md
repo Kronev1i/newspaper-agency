@@ -103,9 +103,8 @@ docker-compose up --build
 ```
 
 The application will be available at http://localhost:8000
+And on render: https://newspaper-agency-2.onrender.com/
 # 🧹 Code Quality
 This project strictly adheres to PEP 8 standards:
 
 Flake8: The codebase passes all linting checks without any suppressions.
-
-Docstrings: All views, models, and forms are documented using Python docstrings for better maintainability.
